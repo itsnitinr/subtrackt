@@ -6,7 +6,7 @@ export const subscriptions: Subscription[] = [
     name: 'Netflix',
     image:
       'https://upload.wikimedia.org/wikipedia/commons/0/0c/Netflix_2015_N_logo.svg',
-    price: 499,
+    price: 9.99,
     interval: 'monthly',
     startDate: new Date('2024-01-01'),
     endDate: null,
@@ -16,8 +16,8 @@ export const subscriptions: Subscription[] = [
     name: 'Spotify',
     image:
       'https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg',
-    price: 199,
-    interval: 'quarterly',
+    price: 9.99,
+    interval: 'monthly',
     startDate: new Date('2024-02-12'),
     endDate: new Date('2024-12-31'),
   },
@@ -26,7 +26,7 @@ export const subscriptions: Subscription[] = [
     name: 'ChatGPT',
     image:
       'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
-    price: 99,
+    price: 20,
     interval: 'monthly',
     startDate: new Date('2024-01-20'),
     endDate: null,
@@ -36,7 +36,7 @@ export const subscriptions: Subscription[] = [
     name: 'Amazon Prime',
     image:
       'https://upload.wikimedia.org/wikipedia/commons/e/e3/Amazon_Prime_Logo.svg',
-    price: 1499,
+    price: 139,
     interval: 'yearly',
     startDate: new Date('2023-11-15'),
     endDate: null,
@@ -46,7 +46,7 @@ export const subscriptions: Subscription[] = [
     name: 'Adobe CC',
     image:
       'https://upload.wikimedia.org/wikipedia/commons/4/4c/Adobe_Creative_Cloud_rainbow_icon.svg',
-    price: 5299,
+    price: 20.99,
     interval: 'monthly',
     startDate: new Date('2024-02-24'),
     endDate: null,
@@ -56,9 +56,19 @@ export const subscriptions: Subscription[] = [
     name: 'Xbox Game Pass',
     image:
       'https://upload.wikimedia.org/wikipedia/commons/3/3a/Xbox_app_logo.svg',
-    price: 1499,
-    interval: 'quarterly',
+    price: 16.99,
+    interval: 'monthly',
     startDate: new Date('2024-01-30'),
+    endDate: new Date('2024-10-10'),
+  },
+  {
+    id: '8',
+    name: 'Playstation Plus',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/e/e1/PlayStationPlus_%28No_Trademark%29.svg',
+    price: 24.99,
+    interval: 'quarterly',
+    startDate: new Date('2024-01-21'),
     endDate: new Date('2024-10-10'),
   },
 ];

@@ -3,6 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { AnimatedNumber } from '@/components/animated-number';
+
+import { useSubscriptions } from '@/hooks/use-subscriptions';
 
 interface MonthSwitcherProps {
   month: Date;
@@ -22,6 +25,15 @@ export const MonthSwitcher = ({
     animate: { y: 0, opacity: 1 },
     exit: (direction: number) => ({ y: direction * -20, opacity: 0 }),
   };
+
+  const { getMonthSubscriptions } = useSubscriptions();
+
+  const monthSubscriptions = getMonthSubscriptions(month);
+
+  const totalCost = monthSubscriptions.reduce(
+    (total, subscription) => total + subscription.price,
+    0
+  );
 
   return (
     <header className="flex items-center justify-between">
@@ -56,7 +68,9 @@ export const MonthSwitcher = ({
           </motion.h2>
         </AnimatePresence>
       </div>
-      <p className="font-medium">$2,097.10</p>
+      <p className="font-medium">
+        $<AnimatedNumber value={totalCost} />
+      </p>
     </header>
   );
 };
