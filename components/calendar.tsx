@@ -1,7 +1,9 @@
-import { isSameMonth } from 'date-fns';
+import { isSameMonth, getDate } from 'date-fns';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { DatePill } from '@/components/date-pill';
+
+import { useSubscriptions } from '@/hooks/use-subscriptions';
 
 interface CalendarProps {
   dates: Date[];
@@ -22,6 +24,10 @@ export const Calendar = ({ dates, monthToShow, direction }: CalendarProps) => {
     }),
   };
 
+  const { getMonthSubscriptions } = useSubscriptions();
+
+  const monthSubscriptions = getMonthSubscriptions(monthToShow);
+
   return (
     <AnimatePresence initial={false} mode="popLayout">
       <motion.div
@@ -39,6 +45,10 @@ export const Calendar = ({ dates, monthToShow, direction }: CalendarProps) => {
             key={date.toISOString()}
             date={date}
             isCurrentMonth={isSameMonth(date, monthToShow)}
+            subscriptions={monthSubscriptions.filter(
+              (subscription) =>
+                getDate(subscription.startDate) === getDate(date)
+            )}
           />
         ))}
       </motion.div>

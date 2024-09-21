@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [{ hostname: 'upload.wikimedia.org' }],
+  },
+};
 
 export default nextConfig;
