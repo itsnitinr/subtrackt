@@ -42,18 +42,8 @@ export const subscriptions: Subscription[] = [
     endDate: null,
   },
   {
-    id: '5',
-    name: 'Disney+',
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg',
-    price: 799,
-    interval: 'monthly',
-    startDate: new Date('2024-03-14'),
-    endDate: new Date('2025-03-01'),
-  },
-  {
     id: '6',
-    name: 'Adobe Creative Cloud',
+    name: 'Adobe CC',
     image:
       'https://upload.wikimedia.org/wikipedia/commons/4/4c/Adobe_Creative_Cloud_rainbow_icon.svg',
     price: 5299,

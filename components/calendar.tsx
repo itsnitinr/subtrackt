@@ -38,7 +38,7 @@ export const Calendar = ({ dates, monthToShow, direction }: CalendarProps) => {
         exit="exit"
         custom={direction}
         transition={{ duration: 0.25, ease: 'easeInOut' }}
-        className="grid grid-cols-7 gap-2 overflow-hidden"
+        className="grid grid-cols-7 gap-2"
       >
         {dates.map((date) => (
           <DatePill
