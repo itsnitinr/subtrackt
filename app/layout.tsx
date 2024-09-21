@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} antialiased bg-background`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <main className="h-full max-w-screen-sm mx-auto px-4">
+          <main className="h-full max-w-lg mx-auto px-4">
             {children}
             <div className="absolute right-4 bottom-4">
               <SettingsMenu />
