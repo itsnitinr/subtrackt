@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+// import { CalendarPlus } from 'lucide-react';
 import {
   subMonths,
   addMonths,
@@ -12,9 +13,11 @@ import {
 } from 'date-fns';
 import { useHotkeys } from '@mantine/hooks';
 
+// import { Button } from '@/components/ui/button';
 import { DayPill } from '@/components/day-pill';
 import { MonthSwitcher } from '@/components/month-switcher';
 import { Calendar } from '@/components/calendar';
+import { Badge } from '@/components/ui/badge';
 
 const Home = () => {
   const [monthToShow, setMonthToShow] = useState(new Date());
@@ -43,6 +46,24 @@ const Home = () => {
 
   return (
     <div className="h-full flex flex-col justify-center gap-6">
+      <div className="flex flex-col gap-4 items-center mb-4">
+        <Badge className="w-fit" variant="secondary">
+          In Development
+        </Badge>
+        <p className="text-center text-sm text-muted-foreground">
+          What you&apos;re looking right now is using dummy data. The ability to
+          add your own subscriptions and track them is coming soon, in a few
+          hours. Keep an eye out on my Twitter profile{' '}
+          <a
+            className="underline"
+            href="https://twitter.com/iamnitinr"
+            target="_blank"
+          >
+            here
+          </a>{' '}
+          or check back in a while.
+        </p>
+      </div>
       <MonthSwitcher
         month={monthToShow}
         onPrevious={goToPreviousMonth}
@@ -61,6 +82,10 @@ const Home = () => {
           direction={direction}
         />
       </section>
+      {/* <Button className="my-4" variant="outline">
+        <CalendarPlus className="size-4 mr-2" />
+        Add subscription
+      </Button> */}
     </div>
   );
 };
