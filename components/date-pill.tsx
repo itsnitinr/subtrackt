@@ -2,11 +2,13 @@ import Image from 'next/image';
 import { format, isToday } from 'date-fns';
 
 import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from '@/components/ui/hover-card';
-import { SubscriptionHoverContent } from '@/components/subscription-hover-content';
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from '@/components/ui/tooltip';
+
+import { SubscriptionTooltipContent } from '@/components/subscription-tooltip-content';
 
 import { cn } from '@/lib/utils';
 import { Subscription } from '@/types/subscription';
@@ -42,35 +44,37 @@ export const DatePill = ({
 
   if (subscriptions.length) {
     return (
-      <HoverCard openDelay={50} closeDelay={0}>
-        <HoverCardTrigger>
-          <div
-            className={cn(
-              'text-center rounded-xl h-16 relative text-sm',
-              'flex items-center justify-center',
-              'cursor-pointer',
-              isCurrentMonth
-                ? 'bg-secondary/60'
-                : 'bg-transparent text-muted-foreground',
-              isToday(date) && 'border border-foreground/10'
-            )}
+      <TooltipProvider delayDuration={100}>
+        <Tooltip>
+          <TooltipTrigger>
+            <div
+              className={cn(
+                'text-center rounded-xl h-16 relative text-sm',
+                'flex items-center justify-center',
+                'cursor-pointer',
+                isCurrentMonth
+                  ? 'bg-secondary/60'
+                  : 'bg-transparent text-muted-foreground',
+                isToday(date) && 'border border-foreground/10'
+              )}
+            >
+              {isCurrentMonth &&
+                subscriptions.length === 1 &&
+                renderSubscriptionImage(subscriptions[0])}
+              {isCurrentMonth && subscriptions.length > 1 && (
+                <p>{subscriptions.length} subscriptions</p>
+              )}
+              <p className="absolute bottom-1 w-full">{format(date, 'd')}</p>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent
+            side="bottom"
+            className="w-fit rounded-xl bg-secondary border-foreground/10 p-0"
           >
-            {isCurrentMonth &&
-              subscriptions.length === 1 &&
-              renderSubscriptionImage(subscriptions[0])}
-            {isCurrentMonth && subscriptions.length > 1 && (
-              <p>{subscriptions.length} subscriptions</p>
-            )}
-            <p className="absolute bottom-1 w-full">{format(date, 'd')}</p>
-          </div>
-        </HoverCardTrigger>
-        <HoverCardContent className="w-fit bg-background/80 border-foreground/10 backdrop-blur-sm p-3">
-          <SubscriptionHoverContent
-            subscription={subscriptions[0]}
-            date={date}
-          />
-        </HoverCardContent>
-      </HoverCard>
+            <SubscriptionTooltipContent subscription={subscriptions[0]} />
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     );
   }
 
