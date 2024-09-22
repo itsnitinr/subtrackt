@@ -10,6 +10,7 @@ import {
   endOfWeek,
   eachDayOfInterval,
 } from 'date-fns';
+import { useHotkeys } from '@mantine/hooks';
 
 import { DayPill } from '@/components/day-pill';
 import { MonthSwitcher } from '@/components/month-switcher';
@@ -34,6 +35,11 @@ const Home = () => {
     const end = endOfWeek(endOfMonth(monthToShow));
     return eachDayOfInterval({ start, end });
   }, [monthToShow]);
+
+  useHotkeys([
+    ['ArrowLeft', goToPreviousMonth],
+    ['ArrowRight', goToNextMonth],
+  ]);
 
   return (
     <div className="h-full flex flex-col justify-center gap-6">
