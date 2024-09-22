@@ -1,7 +1,8 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { Settings, Sun, Moon, LogIn, Import, Share } from 'lucide-react';
+import { Settings, Sun, Moon, Download, Upload, Keyboard } from 'lucide-react';
+import { SiX } from 'react-icons/si';
 import { useOs, useHotkeys } from '@mantine/hooks';
 
 import { Button } from '@/components/ui/button';
@@ -36,7 +37,7 @@ export const SettingsMenu = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" sideOffset={10}>
-        <DropdownMenuLabel>Simple Subscriptions</DropdownMenuLabel>
+        <DropdownMenuLabel>Subscriptions Tracker</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={toggleTheme}>
@@ -51,18 +52,22 @@ export const SettingsMenu = () => {
             </DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <LogIn className="size-4 mr-2" />
-            <span>Signin with Google</span>
+            <Keyboard className="size-4 mr-2" />
+            <span>Keyboard shortcuts</span>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Import className="size-4 mr-2" />
+            <Upload className="size-4 mr-2" />
             <span>Import data</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Download className="size-4 mr-2" />
+            <span>Export data</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Share className="size-4 mr-2" />
-          <span>Share it on Twitter</span>
+          <SiX className="size-3 mr-2" />
+          <span>Share it on X</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
