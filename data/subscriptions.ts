@@ -73,7 +73,7 @@ export const subscriptions: Subscription[] = [
   },
 ];
 
-interface Service {
+export interface Service {
   name: string;
   image: string;
 }
