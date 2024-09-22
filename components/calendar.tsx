@@ -24,9 +24,9 @@ export const Calendar = ({ dates, monthToShow, direction }: CalendarProps) => {
     }),
   };
 
-  const { getMonthSubscriptions } = useSubscriptions();
+  const { getMonthSubscriptions, subscriptions } = useSubscriptions();
 
-  const monthSubscriptions = getMonthSubscriptions(monthToShow);
+  const monthSubscriptions = getMonthSubscriptions(monthToShow, subscriptions);
 
   return (
     <AnimatePresence initial={false} mode="popLayout">

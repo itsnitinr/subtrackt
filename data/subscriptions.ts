@@ -72,3 +72,105 @@ export const subscriptions: Subscription[] = [
     endDate: new Date('2024-10-10'),
   },
 ];
+
+interface Service {
+  name: string;
+  image: string;
+}
+
+export const commonServices: Service[] = [
+  {
+    name: 'Netflix',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/0/0c/Netflix_2015_N_logo.svg',
+  },
+  {
+    name: 'Spotify',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg',
+  },
+  {
+    name: 'ChatGPT',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
+  },
+  {
+    name: 'Amazon Prime',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/e/e3/Amazon_Prime_Logo.svg',
+  },
+  {
+    name: 'Disney+',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg',
+  },
+  {
+    name: 'YouTube Premium',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/d/dd/YouTube_Premium_logo.svg',
+  },
+  {
+    name: 'Apple TV+',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/2/28/Apple_TV_Plus_Logo.svg',
+  },
+  {
+    name: 'HBO Max',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg',
+  },
+  {
+    name: 'Adobe Creative Cloud',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/4/4c/Adobe_Creative_Cloud_rainbow_icon.svg',
+  },
+  {
+    name: 'Xbox Game Pass',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/3/3a/Xbox_app_logo.svg',
+  },
+  {
+    name: 'PlayStation Plus',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/e/e1/PlayStationPlus_%28No_Trademark%29.svg',
+  },
+  {
+    name: 'Nintendo Switch Online',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/5/5d/Nintendo_Switch_Logo.svg',
+  },
+  {
+    name: 'Google One',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg',
+  },
+  {
+    name: 'Dropbox',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/7/78/Dropbox_Icon.svg',
+  },
+  {
+    name: 'Twitch',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/2/26/Twitch_logo.svg',
+  },
+  {
+    name: 'LinkedIn Premium',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png',
+  },
+  {
+    name: 'Canva Pro',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/0/08/Canva_icon_2021.svg',
+  },
+  {
+    name: 'Notion',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png',
+  },
+  {
+    name: 'Evernote',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/4/45/Evernote.svg',
+  },
+];

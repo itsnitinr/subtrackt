@@ -26,9 +26,9 @@ export const MonthSwitcher = ({
     exit: (direction: number) => ({ y: direction * -20, opacity: 0 }),
   };
 
-  const { getMonthSubscriptions } = useSubscriptions();
+  const { getMonthSubscriptions, subscriptions } = useSubscriptions();
 
-  const monthSubscriptions = getMonthSubscriptions(month);
+  const monthSubscriptions = getMonthSubscriptions(month, subscriptions);
 
   const totalCost = monthSubscriptions.reduce(
     (total, subscription) => total + subscription.price,

@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-// import { CalendarPlus } from 'lucide-react';
+import { useState, useMemo,  } from 'react';
 import {
   subMonths,
   addMonths,
@@ -13,11 +12,11 @@ import {
 } from 'date-fns';
 import { useHotkeys } from '@mantine/hooks';
 
-// import { Button } from '@/components/ui/button';
 import { DayPill } from '@/components/day-pill';
 import { MonthSwitcher } from '@/components/month-switcher';
 import { Calendar } from '@/components/calendar';
 import { Badge } from '@/components/ui/badge';
+import { AddSubscription } from '@/components/modals/add-subscription';
 
 const Home = () => {
   const [monthToShow, setMonthToShow] = useState(new Date());
@@ -82,10 +81,7 @@ const Home = () => {
           direction={direction}
         />
       </section>
-      {/* <Button className="my-4" variant="outline">
-        <CalendarPlus className="size-4 mr-2" />
-        Add subscription
-      </Button> */}
+      <AddSubscription />
     </div>
   );
 };
