@@ -27,21 +27,27 @@ const localeToCurrency = {
 };
 
 export const getCurrency = () => {
-  const locale = navigator.language as keyof typeof localeToCurrency;
-  if (!localeToCurrency[locale]) {
+  let locale = 'en-US';
+  if (typeof window !== 'undefined') {
+    locale = window.navigator.language as keyof typeof localeToCurrency;
+  }
+  if (!localeToCurrency[locale as keyof typeof localeToCurrency]) {
     return '';
   }
-  return localeToCurrency[locale];
+  return localeToCurrency[locale as keyof typeof localeToCurrency];
 };
 
 export const getCurrencySymbol = () => {
-  const locale = navigator.language as keyof typeof localeToCurrency;
-  if (!localeToCurrency[locale]) {
+  let locale = 'en-US';
+  if (typeof window !== 'undefined') {
+    locale = window.navigator.language as keyof typeof localeToCurrency;
+  }
+  if (!localeToCurrency[locale as keyof typeof localeToCurrency]) {
     return '';
   }
   return Intl.NumberFormat(locale, {
     style: 'currency',
-    currency: localeToCurrency[locale],
+    currency: localeToCurrency[locale as keyof typeof localeToCurrency],
     currencyDisplay: 'narrowSymbol',
   }).format(0)[0];
 };
