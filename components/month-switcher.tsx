@@ -69,7 +69,7 @@ export const MonthSwitcher = ({
         </AnimatePresence>
       </div>
       <p className="font-medium">
-        $<AnimatedNumber value={totalCost} />
+        <AnimatedNumber value={totalCost} />
       </p>
     </header>
   );
