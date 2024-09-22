@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { AnimatedNumber } from '@/components/animated-number';
+import { MonthlyCost } from '@/components/monthly-cost';
 
 import { useSubscriptions } from '@/hooks/use-subscriptions';
 
@@ -69,7 +69,11 @@ export const MonthSwitcher = ({
         </AnimatePresence>
       </div>
       <p className="font-medium">
-        <AnimatedNumber value={totalCost} />
+        <MonthlyCost
+          value={totalCost}
+          subscriptions={monthSubscriptions}
+          month={month}
+        />
       </p>
     </header>
   );

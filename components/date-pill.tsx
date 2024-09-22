@@ -25,12 +25,6 @@ export const DatePill = ({
   subscriptions,
 }: DatePillProps) => {
   const renderSubscriptionImage = (subscription: Subscription) => {
-    // If icon, return the icon
-    if (typeof subscription.image === 'function') {
-      return <subscription.image className="size-5 -translate-y-3" />;
-    }
-
-    // If string, return image tag
     return (
       <Image
         src={subscription.image}
