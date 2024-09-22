@@ -1,10 +1,11 @@
 import Image from 'next/image';
-import { format } from 'date-fns';
+import { format, isPast } from 'date-fns';
 import {
   CalendarIcon,
   RepeatIcon,
   CircleDashedIcon,
   WalletIcon,
+  CalendarOffIcon,
 } from 'lucide-react';
 
 import { Subscription } from '@/types/subscription';
@@ -29,13 +30,15 @@ export const SubscriptionTooltipContent = ({
         <p className="font-medium">{subscription.name}</p>
       </div>
       <div className="flex flex-col gap-1 px-3 pb-3 text-xs border-b border-foreground/10">
-        <div className="flex items-center justify-between gap-8">
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <CircleDashedIcon className="size-3" />
-            <p>Status</p>
+        {!subscription.endDate && (
+          <div className="flex items-center justify-between gap-8">
+            <div className="flex items-center gap-1 text-muted-foreground">
+              <CircleDashedIcon className="size-3" />
+              <p>Status</p>
+            </div>
+            <p className="font-medium">active</p>
           </div>
-          <p className="font-medium">Active</p>
-        </div>
+        )}
         <div className="flex items-center justify-between gap-8">
           <div className="flex items-center gap-1 text-muted-foreground">
             <RepeatIcon className="size-3" />
@@ -52,6 +55,17 @@ export const SubscriptionTooltipContent = ({
             {format(subscription.startDate, 'dd MMM yyyy')}
           </p>
         </div>
+        {subscription.endDate && (
+          <div className="flex items-center justify-between gap-8">
+            <div className="flex items-center gap-1 text-muted-foreground">
+              <CalendarOffIcon className="size-3" />
+              <p>{isPast(subscription.endDate) ? 'Ended' : 'Ends'} on</p>
+            </div>
+            <p className="font-medium">
+              {format(subscription.endDate, 'dd MMM yyyy')}
+            </p>
+          </div>
+        )}
       </div>
       <div className="flex items-center justify-between gap-8 px-3 pb-3 text-xs">
         <div className="flex items-center gap-1 text-muted-foreground">
