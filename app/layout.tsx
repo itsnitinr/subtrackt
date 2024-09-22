@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 
 import { ThemeProvider } from '@/components/theme-provider';
+import { SettingsMenu } from '@/components/settings-menu';
 
 import './globals.css';
-import { SettingsMenu } from '@/components/settings-menu';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             </div>
           </main>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
