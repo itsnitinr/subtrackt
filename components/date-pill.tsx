@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useState } from 'react';
 import { format, isToday } from 'date-fns';
 
 import {
@@ -12,6 +13,7 @@ import { SubscriptionTooltipContent } from '@/components/subscription-tooltip-co
 
 import { cn } from '@/lib/utils';
 import { Subscription } from '@/types/subscription';
+import { EditSubscription } from '@/components/modals/edit-subscription';
 
 interface DatePillProps {
   date: Date;
@@ -24,6 +26,8 @@ export const DatePill = ({
   isCurrentMonth,
   subscriptions,
 }: DatePillProps) => {
+  const [editModalOpen, setEditModalOpen] = useState(false);
+
   const renderSubscriptionImage = (subscription: Subscription) => {
     return (
       <Image
@@ -38,37 +42,47 @@ export const DatePill = ({
 
   if (subscriptions.length) {
     return (
-      <TooltipProvider delayDuration={100}>
-        <Tooltip>
-          <TooltipTrigger>
-            <div
-              className={cn(
-                'text-center rounded-xl h-16 relative text-sm',
-                'flex items-center justify-center',
-                'cursor-pointer',
-                isCurrentMonth
-                  ? 'bg-secondary/60'
-                  : 'bg-transparent text-muted-foreground',
-                isToday(date) && 'border border-foreground/10'
-              )}
+      <>
+        <TooltipProvider delayDuration={100}>
+          <Tooltip>
+            <TooltipTrigger>
+              <div
+                className={cn(
+                  'text-center rounded-xl h-16 relative text-sm',
+                  'flex items-center justify-center',
+                  'cursor-pointer',
+                  isCurrentMonth
+                    ? 'bg-secondary/60'
+                    : 'bg-transparent text-muted-foreground',
+                  isToday(date) && 'border border-foreground/10'
+                )}
+              >
+                {isCurrentMonth &&
+                  subscriptions.length === 1 &&
+                  renderSubscriptionImage(subscriptions[0])}
+                {isCurrentMonth && subscriptions.length > 1 && (
+                  <p>{subscriptions.length} subscriptions</p>
+                )}
+                <p className="absolute bottom-1 w-full">{format(date, 'd')}</p>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent
+              side="bottom"
+              className="w-fit rounded-xl bg-secondary border-foreground/10 p-0"
             >
-              {isCurrentMonth &&
-                subscriptions.length === 1 &&
-                renderSubscriptionImage(subscriptions[0])}
-              {isCurrentMonth && subscriptions.length > 1 && (
-                <p>{subscriptions.length} subscriptions</p>
-              )}
-              <p className="absolute bottom-1 w-full">{format(date, 'd')}</p>
-            </div>
-          </TooltipTrigger>
-          <TooltipContent
-            side="bottom"
-            className="w-fit rounded-xl bg-secondary border-foreground/10 p-0"
-          >
-            <SubscriptionTooltipContent subscription={subscriptions[0]} />
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+              <SubscriptionTooltipContent
+                subscription={subscriptions[0]}
+                onEdit={() => setEditModalOpen(true)}
+              />
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <EditSubscription
+          subscription={subscriptions[0]}
+          open={editModalOpen}
+          onOpenChange={setEditModalOpen}
+        />
+      </>
     );
   }
 

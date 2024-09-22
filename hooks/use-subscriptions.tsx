@@ -18,6 +18,8 @@ interface SubscriptionState {
     subscriptions: Subscription[]
   ) => Subscription[];
   addSubscription: (subscription: Subscription) => void;
+  removeSubscription: (id: string) => void;
+  updateSubscription: (id: string, subscription: Subscription) => void;
 }
 
 export const useSubscriptions = create(

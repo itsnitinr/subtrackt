@@ -6,30 +6,47 @@ import {
   CircleDashedIcon,
   WalletIcon,
   CalendarOffIcon,
+  EditIcon,
+  TrashIcon,
 } from 'lucide-react';
 
 import { Subscription } from '@/types/subscription';
 
 import { getCurrencySymbol } from '@/lib/currency';
 
+import { useSubscriptions } from '@/hooks/use-subscriptions';
+
 interface SubscriptionTooltipContentProps {
   subscription: Subscription;
+  onEdit: () => void;
 }
 
 export const SubscriptionTooltipContent = ({
   subscription,
+  onEdit,
 }: SubscriptionTooltipContentProps) => {
+  const { removeSubscription } = useSubscriptions();
+
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex items-center gap-2 border-b border-foreground/10 py-3 px-3">
-        <Image
-          src={subscription.image as string}
-          width={40}
-          height={40}
-          alt={subscription.name}
-          className="size-4"
-        />
-        <p className="font-medium">{subscription.name}</p>
+      <div className="flex items-center gap-8 justify-between border-b border-foreground/10 py-3 px-3">
+        <div className="flex items-center gap-2">
+          <Image
+            src={subscription.image as string}
+            width={40}
+            height={40}
+            alt={subscription.name}
+            className="size-4"
+          />
+          <p className="font-medium">{subscription.name}</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <EditIcon className="size-3 cursor-pointer" onClick={onEdit} />
+          <TrashIcon
+            className="size-3 cursor-pointer"
+            onClick={() => removeSubscription(subscription.id)}
+          />
+        </div>
       </div>
       <div className="flex flex-col gap-1 px-3 pb-3 text-xs border-b border-foreground/10">
         {!subscription.endDate && (
