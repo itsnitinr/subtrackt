@@ -32,8 +32,6 @@ export const useSubscriptions = create(
         const monthStart = startOfMonth(date);
         const monthEnd = endOfMonth(date);
 
-        console.log({ subscriptions });
-
         return subscriptions.filter((subscription) => {
           const subscriptionStart = new Date(subscription.startDate);
           const subscriptionEnd = subscription.endDate

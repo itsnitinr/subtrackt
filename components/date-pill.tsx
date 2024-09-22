@@ -26,7 +26,8 @@ export const DatePill = ({
   isCurrentMonth,
   subscriptions,
 }: DatePillProps) => {
-  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [subscriptionToEdit, setSubscriptionToEdit] =
+    useState<Subscription | null>(null);
 
   const renderSubscriptionImage = (subscription: Subscription) => {
     return (
@@ -61,7 +62,9 @@ export const DatePill = ({
                   subscriptions.length === 1 &&
                   renderSubscriptionImage(subscriptions[0])}
                 {isCurrentMonth && subscriptions.length > 1 && (
-                  <p>{subscriptions.length} subscriptions</p>
+                  <div className="h-5 w-5 rounded-full text-xs bg-emerald-700 dark:bg-emerald-500 text-white flex items-center justify-center -translate-y-3">
+                    {subscriptions.length}
+                  </div>
                 )}
                 <p className="absolute bottom-1 w-full">{format(date, 'd')}</p>
               </div>
@@ -71,17 +74,21 @@ export const DatePill = ({
               className="w-fit rounded-xl bg-secondary border-foreground/10 p-0"
             >
               <SubscriptionTooltipContent
-                subscription={subscriptions[0]}
-                onEdit={() => setEditModalOpen(true)}
+                subscriptions={subscriptions}
+                onEdit={(subscription) => {
+                  setSubscriptionToEdit(subscription);
+                }}
               />
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-        <EditSubscription
-          subscription={subscriptions[0]}
-          open={editModalOpen}
-          onOpenChange={setEditModalOpen}
-        />
+        {subscriptionToEdit && (
+          <EditSubscription
+            subscriptionToEdit={subscriptionToEdit}
+            open={subscriptionToEdit !== null}
+            setSubscriptionToEdit={setSubscriptionToEdit}
+          />
+        )}
       </>
     );
   }

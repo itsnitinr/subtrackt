@@ -1,6 +1,7 @@
 'use client';
 
 import { z } from 'zod';
+import Image from 'next/image';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -10,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Calendar } from '@/components/ui/calendar';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Separator } from '@/components/ui/separator';
 import {
   Dialog,
   DialogContent,
@@ -46,36 +48,39 @@ import { subscriptionSchema } from '@/schema/subscription';
 import { cn } from '@/lib/utils';
 import { useSubscriptions } from '@/hooks/use-subscriptions';
 import { Subscription } from '@/types/subscription';
+import { commonServices } from '@/data/subscriptions';
 
 interface EditSubscriptionProps {
-  subscription: Subscription;
+  subscriptionToEdit: Subscription;
+  setSubscriptionToEdit: (subscription: Subscription | null) => void;
   open: boolean;
-  onOpenChange: (open: boolean) => void;
 }
 
 export const EditSubscription = ({
-  subscription,
+  subscriptionToEdit,
   open,
-  onOpenChange,
+  setSubscriptionToEdit,
 }: EditSubscriptionProps) => {
   const { updateSubscription } = useSubscriptions();
 
   const form = useForm<z.infer<typeof subscriptionSchema>>({
     resolver: zodResolver(subscriptionSchema),
     defaultValues: {
-      name: subscription.name,
-      image: subscription.image,
-      price: subscription.price,
-      interval: subscription.interval,
-      isOngoing: !subscription.endDate,
-      startDate: new Date(subscription.startDate),
-      endDate: subscription.endDate ? new Date(subscription.endDate) : null,
+      name: subscriptionToEdit.name,
+      image: subscriptionToEdit.image,
+      price: subscriptionToEdit.price,
+      interval: subscriptionToEdit.interval,
+      isOngoing: !subscriptionToEdit.endDate,
+      startDate: new Date(subscriptionToEdit.startDate),
+      endDate: subscriptionToEdit.endDate
+        ? new Date(subscriptionToEdit.endDate)
+        : null,
     },
   });
 
   function onSubmit(values: z.infer<typeof subscriptionSchema>) {
-    updateSubscription(subscription.id, {
-      ...subscription,
+    updateSubscription(subscriptionToEdit.id, {
+      ...subscriptionToEdit,
       name: values.name,
       image: values.image || '/placeholder-logo.svg',
       price: values.price,
@@ -83,11 +88,18 @@ export const EditSubscription = ({
       startDate: values.startDate,
       endDate: values.isOngoing ? null : values.endDate,
     });
-    onOpenChange(false);
+    setSubscriptionToEdit(null);
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      open={open}
+      onOpenChange={(isOpen) => {
+        if (!isOpen) {
+          setSubscriptionToEdit(null);
+        }
+      }}
+    >
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit subscription</DialogTitle>
@@ -98,6 +110,38 @@ export const EditSubscription = ({
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="pt-4">
             <ScrollArea className="max-h-96 overflow-y-auto">
+              <Select
+                onValueChange={(value) => {
+                  const service = commonServices.find(
+                    (service) => service.name === value
+                  );
+                  if (service) {
+                    form.setValue('name', service.name);
+                    form.setValue('image', service.image);
+                  }
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a service to prefill name and logo" />
+                </SelectTrigger>
+                <SelectContent>
+                  {commonServices.map((service) => (
+                    <SelectItem key={service.name} value={service.name}>
+                      <div className="flex items-center gap-2">
+                        <Image
+                          src={service.image}
+                          alt={service.name}
+                          width={20}
+                          height={20}
+                          className="rounded-md size-5"
+                        />
+                        {service.name}
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Separator className="my-4" />
               <div className="space-y-3">
                 <FormField
                   control={form.control}
