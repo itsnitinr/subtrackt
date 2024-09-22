@@ -10,6 +10,8 @@ import {
 
 import { Subscription } from '@/types/subscription';
 
+import { getCurrencySymbol } from '@/lib/currency';
+
 interface SubscriptionTooltipContentProps {
   subscription: Subscription;
 }
@@ -73,7 +75,8 @@ export const SubscriptionTooltipContent = ({
           <p>Cost</p>
         </div>
         <p className="font-medium text-emerald-700 dark:text-emerald-500">
-          ${subscription.price}
+          {getCurrencySymbol()}
+          {subscription.price}
         </p>
       </div>
     </div>

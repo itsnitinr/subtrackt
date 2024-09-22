@@ -11,6 +11,7 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 import { Subscription } from '@/types/subscription';
+import { getCurrency, getCurrencySymbol } from '@/lib/currency';
 
 interface MonthlyCostProps {
   value: number;
@@ -31,7 +32,7 @@ export const MonthlyCost = ({
             value={value}
             format={{
               style: 'currency',
-              currency: 'USD',
+              currency: getCurrency(),
               currencyDisplay: 'narrowSymbol',
             }}
           />
@@ -69,7 +70,8 @@ export const MonthlyCost = ({
                     </div>
                     <div className="flex flex-col text-right">
                       <p className="font-medium text-emerald-700 dark:text-emerald-500">
-                        ${subscription.price}
+                        {getCurrencySymbol()}
+                        {subscription.price}
                       </p>
                       <p className="text-muted-foreground text-[10px]">
                         {((subscription.price / value) * 100).toFixed(2)}%
