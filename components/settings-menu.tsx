@@ -70,7 +70,8 @@ export const SettingsMenu = () => {
         if (
           !sub.id ||
           !sub.name ||
-          !sub.price ||
+          sub.price === undefined ||
+          sub.price === null ||
           !sub.startDate ||
           !sub.interval
         ) {

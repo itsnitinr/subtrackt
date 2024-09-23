@@ -21,6 +21,9 @@ export const subscriptionSchema = z
   .refine(
     (data) => {
       if (data.image) {
+        if (data.image === '/placeholder-logo.svg') {
+          return true;
+        }
         return z.string().url().safeParse(data.image).success;
       }
       return true;
