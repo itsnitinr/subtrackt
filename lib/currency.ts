@@ -45,9 +45,11 @@ export const getCurrencySymbol = () => {
   if (!localeToCurrency[locale as keyof typeof localeToCurrency]) {
     return '';
   }
+  const currencyCode =
+    localeToCurrency[locale as keyof typeof localeToCurrency] || 'USD';
   return Intl.NumberFormat(locale, {
     style: 'currency',
-    currency: localeToCurrency[locale as keyof typeof localeToCurrency],
+    currency: currencyCode,
     currencyDisplay: 'narrowSymbol',
   }).format(0)[0];
 };
