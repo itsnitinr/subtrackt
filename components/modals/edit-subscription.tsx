@@ -86,7 +86,7 @@ export const EditSubscription = ({
               Update your subscription details.
             </DialogDescription>
           </DialogHeader>
-          <SubscriptionForm form={form} onSubmit={onSubmit} />
+          <SubscriptionForm form={form} onSubmit={onSubmit} isEditing />
         </DialogContent>
       </Dialog>
     );
@@ -108,7 +108,7 @@ export const EditSubscription = ({
             Update your subscription details.
           </DrawerDescription>
         </DrawerHeader>
-        <SubscriptionForm form={form} onSubmit={onSubmit} isDrawer />
+        <SubscriptionForm form={form} onSubmit={onSubmit} isDrawer isEditing />
       </DrawerContent>
     </Drawer>
   );
