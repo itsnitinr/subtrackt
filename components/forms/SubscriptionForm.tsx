@@ -44,10 +44,12 @@ export const SubscriptionForm = ({
   form,
   onSubmit,
   isDrawer = false,
+  isEditing = false,
 }: {
   form: UseFormReturn<z.infer<typeof subscriptionSchema>>;
   onSubmit: (values: z.infer<typeof subscriptionSchema>) => void;
   isDrawer?: boolean;
+  isEditing?: boolean;
 }) => {
   return (
     <Form {...form}>
@@ -255,7 +257,9 @@ export const SubscriptionForm = ({
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit">Add subscription</Button>
+            <Button type="submit">
+              {isEditing ? 'Update' : 'Add'} subscription
+            </Button>
           </DialogFooter>
         )}
       </form>
