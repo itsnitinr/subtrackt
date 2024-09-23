@@ -14,6 +14,7 @@ const localeToCurrency = {
   'en-ZM': 'ZMW',
   'en-ZW': 'ZWL',
   'en-MW': 'MWK',
+  'fr-FR': 'EUR',
   'ja-JP': 'JPY',
   'zh-CN': 'CNY',
   'zh-TW': 'TWD',
