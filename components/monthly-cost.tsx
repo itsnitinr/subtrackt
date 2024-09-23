@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import MotionNumber from 'motion-number';
 
@@ -24,18 +26,28 @@ export const MonthlyCost = ({
   subscriptions,
   month,
 }: MonthlyCostProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
+
   return (
     <TooltipProvider delayDuration={100}>
       <Tooltip>
         <TooltipTrigger>
-          <MotionNumber
-            value={value}
-            format={{
-              style: 'currency',
-              currency: getCurrency(),
-              currencyDisplay: 'narrowSymbol',
-            }}
-          />
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <MotionNumber
+              value={value}
+              format={{
+                style: 'currency',
+                currency: getCurrency(),
+                currencyDisplay: 'narrowSymbol',
+              }}
+            />
+          </motion.div>
         </TooltipTrigger>
         <TooltipContent
           side="bottom"

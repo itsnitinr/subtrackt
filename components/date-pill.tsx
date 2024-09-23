@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { format, isToday } from 'date-fns';
 
@@ -58,14 +61,16 @@ export const DatePill = ({
                   isToday(date) && 'border border-foreground/10'
                 )}
               >
-                {isCurrentMonth &&
-                  subscriptions.length === 1 &&
-                  renderSubscriptionImage(subscriptions[0])}
-                {isCurrentMonth && subscriptions.length > 1 && (
-                  <div className="h-5 w-5 rounded-full text-xs bg-emerald-700 dark:bg-emerald-500 text-white flex items-center justify-center -translate-y-3">
-                    {subscriptions.length}
-                  </div>
-                )}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                  {isCurrentMonth &&
+                    subscriptions.length === 1 &&
+                    renderSubscriptionImage(subscriptions[0])}
+                  {isCurrentMonth && subscriptions.length > 1 && (
+                    <div className="h-5 w-5 rounded-full text-xs bg-emerald-700 dark:bg-emerald-500 text-white flex items-center justify-center -translate-y-3">
+                      {subscriptions.length}
+                    </div>
+                  )}
+                </motion.div>
                 <p className="absolute bottom-1 w-full">{format(date, 'd')}</p>
               </div>
             </TooltipTrigger>
