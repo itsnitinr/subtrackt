@@ -20,6 +20,8 @@ interface SubscriptionState {
   addSubscription: (subscription: Subscription) => void;
   removeSubscription: (id: string) => void;
   updateSubscription: (id: string, subscription: Subscription) => void;
+  exportSubscriptions: () => void;
+  importSubscriptions: (subscriptions: Subscription[]) => void;
 }
 
 export const useSubscriptions = create(
@@ -84,6 +86,20 @@ export const useSubscriptions = create(
           s.id === id ? subscription : s
         );
         set({ subscriptions: updatedSubscriptions });
+      },
+      exportSubscriptions: () => {
+        const subscriptions = get().subscriptions;
+        const json = JSON.stringify(subscriptions);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'subscriptions.json';
+        a.click();
+        URL.revokeObjectURL(url);
+      },
+      importSubscriptions: (subscriptions: Subscription[]) => {
+        set({ subscriptions });
       },
     }),
     {

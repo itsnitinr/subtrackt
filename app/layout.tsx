@@ -5,6 +5,8 @@ import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from '@/components/theme-provider';
 import { SettingsMenu } from '@/components/settings-menu';
 
+import { Toaster } from '@/components/ui/sonner';
+
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -29,6 +31,7 @@ export default function RootLayout({
               <SettingsMenu />
             </div>
           </main>
+          <Toaster />
         </ThemeProvider>
         <Analytics />
       </body>
