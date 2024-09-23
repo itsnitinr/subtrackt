@@ -146,7 +146,7 @@ export const EditSubscription = ({
                                 alt="Service Logo"
                                 width={20}
                                 height={20}
-                                className="size-6"
+                                className="size-6 object-contain"
                               />
                             </div>
                             <Input

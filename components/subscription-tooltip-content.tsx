@@ -38,7 +38,7 @@ export const SubscriptionTooltipContent = ({
                 width={40}
                 height={40}
                 alt={subscription.name}
-                className="size-4"
+                className="size-4 object-contain"
               />
               <p className="font-medium">{subscription.name}</p>
             </div>

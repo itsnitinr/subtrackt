@@ -59,7 +59,7 @@ export const MonthlyCost = ({
                           width={40}
                           height={40}
                           alt={subscription.name}
-                          className="size-4"
+                          className="size-4 object-contain"
                         />
                         <p>{subscription.name}</p>
                       </div>

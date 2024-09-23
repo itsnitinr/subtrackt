@@ -36,7 +36,7 @@ export const DatePill = ({
         width={40}
         height={40}
         alt={subscription.name}
-        className="-translate-y-2.5 size-6"
+        className="-translate-y-2.5 size-6 object-contain"
       />
     );
   };

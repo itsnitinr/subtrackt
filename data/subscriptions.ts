@@ -174,3 +174,133 @@ export const commonServices: Service[] = [
     image: 'https://upload.wikimedia.org/wikipedia/commons/4/45/Evernote.svg',
   },
 ];
+
+interface GroupedServices {
+  group: string;
+  services: Service[];
+}
+
+export const groupedServices: GroupedServices[] = [
+  {
+    group: 'Entertainment',
+    services: [
+      {
+        name: 'Netflix',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/0/0c/Netflix_2015_N_logo.svg',
+      },
+      {
+        name: 'YouTube Premium',
+        image: 'https://svgl.app/library/youtube.svg',
+      },
+      {
+        name: 'Prime Video',
+        image: 'https://svgl.app/library/prime-video.svg',
+      },
+      {
+        name: 'Hotstar',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/b/b6/Disney%2B_Hotstar_2024.svg',
+      },
+      {
+        name: 'JioCinema',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/1/14/Jiocinema.png',
+      },
+    ],
+  },
+  {
+    group: 'Music',
+    services: [
+      {
+        name: 'Spotify',
+        image: 'https://svgl.app/library/spotify.svg',
+      },
+      {
+        name: 'Apple Music',
+        image: 'https://svgl.app/library/apple-music-icon.svg',
+      },
+      {
+        name: 'YouTube Music',
+        image: 'https://svgl.app/library/youtube_music.svg',
+      },
+    ],
+  },
+  {
+    group: 'AI Services',
+    services: [
+      {
+        name: 'ChatGPT',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
+      },
+      {
+        name: 'OpenAI',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg',
+      },
+      {
+        name: 'Claude',
+        image: 'https://svgl.app/library/claude-ai.svg',
+      },
+      {
+        name: 'Gemini',
+        image: 'https://svgl.app/library/bard.svg',
+      },
+    ],
+  },
+  {
+    group: 'Cloud Services',
+    services: [
+      {
+        name: 'Google Cloud',
+        image: 'https://svgl.app/library/google.svg',
+      },
+      {
+        name: 'AWS',
+        image: 'https://svgl.app/library/aws.svg',
+      },
+      {
+        name: 'Azure',
+        image: 'https://svgl.app/library/azure.svg',
+      },
+      {
+        name: 'Digital Ocean',
+        image: 'https://svgl.app/library/digitalocean.svg',
+      },
+      {
+        name: 'Vercel',
+        image: 'https://svgl.app/library/vercel.svg',
+      },
+    ],
+  },
+  {
+    group: 'Software',
+    services: [
+      {
+        name: 'Adobe',
+        image: 'https://svgl.app/library/adobe.svg',
+      },
+      {
+        name: 'Figma',
+        image: 'https://svgl.app/library/figma.svg',
+      },
+      {
+        name: 'Zoom',
+        image: 'https://svgl.app/library/zoom.svg',
+      },
+      {
+        name: 'Slack',
+        image: 'https://svgl.app/library/slack.svg',
+      },
+      {
+        name: 'Notion',
+        image: 'https://svgl.app/library/notion.svg',
+      },
+      {
+        name: 'Linear',
+        image: 'https://svgl.app/library/linear.svg',
+      },
+    ],
+  },
+];
