@@ -10,9 +10,8 @@ import {
   Download,
   Upload,
   Keyboard,
-  MessageSquare,
+  Handshake,
 } from 'lucide-react';
-import { SiX } from 'react-icons/si';
 import { useOs, useHotkeys } from '@mantine/hooks';
 
 import { Button } from '@/components/ui/button';
@@ -28,6 +27,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { KeyboardShortcuts } from '@/components/modals/keyboard-shortcuts';
+import { CreditsModal } from '@/components/modals/credits-modal';
 
 import { useSubscriptions } from '@/hooks/use-subscriptions';
 import { Subscription } from '@/types/subscription';
@@ -48,6 +48,7 @@ export const SettingsMenu = () => {
 
   const [isKeyboardShortcutsModalOpen, setIsKeyboardShortcutsModalOpen] =
     useState(false);
+  const [isCreditsModalOpen, setIsCreditsModalOpen] = useState(false);
 
   const importData = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -161,13 +162,9 @@ export const SettingsMenu = () => {
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <SiX className="size-3 mr-2" />
-            <span>Share it on X</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <MessageSquare className="size-3 mr-2" />
-            <span>Feedback / requests</span>
+          <DropdownMenuItem onClick={() => setIsCreditsModalOpen(true)}>
+            <Handshake className="size-3 mr-2" />
+            <span>Credits</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -175,6 +172,7 @@ export const SettingsMenu = () => {
         open={isKeyboardShortcutsModalOpen}
         setOpen={setIsKeyboardShortcutsModalOpen}
       />
+      <CreditsModal open={isCreditsModalOpen} setOpen={setIsCreditsModalOpen} />
     </>
   );
 };
