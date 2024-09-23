@@ -45,7 +45,7 @@ export const AddSubscription = () => {
       image: '',
       price: 0,
       interval: 'monthly',
-      isOngoing: false,
+      isOngoing: true,
       startDate: new Date(),
       endDate: null,
     },
