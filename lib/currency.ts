@@ -32,7 +32,7 @@ export const getCurrency = () => {
     locale = window.navigator.language as keyof typeof localeToCurrency;
   }
   if (!localeToCurrency[locale as keyof typeof localeToCurrency]) {
-    return '';
+    return 'USD';
   }
   return localeToCurrency[locale as keyof typeof localeToCurrency];
 };
@@ -43,7 +43,7 @@ export const getCurrencySymbol = () => {
     locale = window.navigator.language as keyof typeof localeToCurrency;
   }
   if (!localeToCurrency[locale as keyof typeof localeToCurrency]) {
-    return '';
+    return 'USD';
   }
   const currencyCode =
     localeToCurrency[locale as keyof typeof localeToCurrency] || 'USD';
