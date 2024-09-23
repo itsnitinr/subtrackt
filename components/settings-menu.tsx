@@ -1,7 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import { useTheme } from 'next-themes';
-import { Settings, Sun, Moon, Download, Upload, Keyboard } from 'lucide-react';
+import {
+  Settings,
+  Sun,
+  Moon,
+  Download,
+  Upload,
+  Keyboard,
+  MessageSquare,
+} from 'lucide-react';
 import { SiX } from 'react-icons/si';
 import { useOs, useHotkeys } from '@mantine/hooks';
 
@@ -17,6 +26,8 @@ import {
   DropdownMenuShortcut,
 } from '@/components/ui/dropdown-menu';
 
+import { KeyboardShortcuts } from '@/components/modals/keyboard-shortcuts';
+
 export const SettingsMenu = () => {
   const { theme, setTheme } = useTheme();
 
@@ -29,47 +40,62 @@ export const SettingsMenu = () => {
   const os = useOs();
   const isMac = os === 'macos' || os === 'ios';
 
+  const [isKeyboardShortcutsModalOpen, setIsKeyboardShortcutsModalOpen] =
+    useState(false);
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button size="icon" variant="outline">
-          <Settings className="size-5 text-muted-foreground" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" sideOffset={10}>
-        <DropdownMenuLabel>Subscriptions Tracker</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem onClick={toggleTheme}>
-            {theme === 'light' ? (
-              <Sun className="size-4 mr-2" />
-            ) : (
-              <Moon className="size-4 mr-2" />
-            )}
-            <span>Toggle theme</span>
-            <DropdownMenuShortcut>
-              {isMac ? '⌥T' : 'Alt+T'}
-            </DropdownMenuShortcut>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button size="icon" variant="outline">
+            <Settings className="size-5 text-muted-foreground" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56" align="end" sideOffset={10}>
+          <DropdownMenuLabel>Subtrackt</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuItem onClick={toggleTheme}>
+              {theme === 'light' ? (
+                <Sun className="size-4 mr-2" />
+              ) : (
+                <Moon className="size-4 mr-2" />
+              )}
+              <span>Toggle theme</span>
+              <DropdownMenuShortcut>
+                {isMac ? '⌥T' : 'Alt+T'}
+              </DropdownMenuShortcut>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setIsKeyboardShortcutsModalOpen(true)}
+            >
+              <Keyboard className="size-4 mr-2" />
+              <span>Keyboard shortcuts</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Upload className="size-4 mr-2" />
+              <span>Import data</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Download className="size-4 mr-2" />
+              <span>Export data</span>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <SiX className="size-3 mr-2" />
+            <span>Share it on X</span>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Keyboard className="size-4 mr-2" />
-            <span>Keyboard shortcuts</span>
+            <MessageSquare className="size-3 mr-2" />
+            <span>Feedback / requests</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Upload className="size-4 mr-2" />
-            <span>Import data</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Download className="size-4 mr-2" />
-            <span>Export data</span>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <SiX className="size-3 mr-2" />
-          <span>Share it on X</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <KeyboardShortcuts
+        open={isKeyboardShortcutsModalOpen}
+        setOpen={setIsKeyboardShortcutsModalOpen}
+      />
+    </>
   );
 };
