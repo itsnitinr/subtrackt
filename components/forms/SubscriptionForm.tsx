@@ -31,6 +31,7 @@ import {
 } from '@/components/ui/popover';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { DialogClose, DialogFooter } from '@/components/ui/dialog';
+import { DrawerClose, DrawerFooter } from '@/components/ui/drawer';
 
 import { PrefillService } from '@/components/prefill-service';
 
@@ -41,14 +42,18 @@ import { subscriptionSchema } from '@/schema/subscription';
 export const SubscriptionForm = ({
   form,
   onSubmit,
+  isDrawer = false,
 }: {
   form: UseFormReturn<z.infer<typeof subscriptionSchema>>;
   onSubmit: (values: z.infer<typeof subscriptionSchema>) => void;
+  isDrawer?: boolean;
 }) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="pt-4">
-        <ScrollArea className="max-h-96 overflow-y-auto">
+        <ScrollArea
+          className={cn('max-h-96 overflow-y-auto', isDrawer && 'px-2')}
+        >
           <div className="p-1">
             <PrefillService
               onSelect={(service) => {
@@ -258,12 +263,21 @@ export const SubscriptionForm = ({
             </div>
           </div>
         </ScrollArea>
-        <DialogFooter className="pt-4">
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DialogClose>
-          <Button type="submit">Add subscription</Button>
-        </DialogFooter>
+        {isDrawer ? (
+          <DrawerFooter className="pt-4">
+            <DrawerClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DrawerClose>
+            <Button type="submit">Add subscription</Button>
+          </DrawerFooter>
+        ) : (
+          <DialogFooter className="pt-4">
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
+            <Button type="submit">Add subscription</Button>
+          </DialogFooter>
+        )}
       </form>
     </Form>
   );

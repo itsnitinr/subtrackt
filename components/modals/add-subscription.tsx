@@ -19,11 +19,24 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer';
+
 import { subscriptionSchema } from '@/schema/subscription';
+
 import { useSubscriptions } from '@/hooks/use-subscriptions';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 export const AddSubscription = () => {
   const { addSubscription } = useSubscriptions();
+
+  const isDesktop = useMediaQuery('(min-width: 768px)');
 
   const form = useForm<z.infer<typeof subscriptionSchema>>({
     resolver: zodResolver(subscriptionSchema),
@@ -56,9 +69,35 @@ export const AddSubscription = () => {
 
   useHotkeys([['mod+a', () => setOpen(true)]]);
 
+  if (isDesktop) {
+    return (
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button
+            className="my-4"
+            variant="outline"
+            onClick={() => setOpen(true)}
+          >
+            <CalendarPlus className="size-4 mr-2" />
+            Add subscription
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add subscription</DialogTitle>
+            <DialogDescription>
+              Fill in your subscription details to start tracking them.
+            </DialogDescription>
+          </DialogHeader>
+          <SubscriptionForm form={form} onSubmit={onSubmit} />
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
         <Button
           className="my-4"
           variant="outline"
@@ -67,16 +106,16 @@ export const AddSubscription = () => {
           <CalendarPlus className="size-4 mr-2" />
           Add subscription
         </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Add subscription</DialogTitle>
-          <DialogDescription>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Add subscription</DrawerTitle>
+          <DrawerDescription>
             Fill in your subscription details to start tracking them.
-          </DialogDescription>
-        </DialogHeader>
-        <SubscriptionForm form={form} onSubmit={onSubmit} />
-      </DialogContent>
-    </Dialog>
+          </DrawerDescription>
+        </DrawerHeader>
+        <SubscriptionForm form={form} onSubmit={onSubmit} isDrawer />
+      </DrawerContent>
+    </Drawer>
   );
 };
