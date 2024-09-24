@@ -22,12 +22,14 @@ interface DatePillProps {
   date: Date;
   isCurrentMonth: boolean;
   subscriptions: Subscription[];
+  onAddSubscription: (date: Date) => void;
 }
 
 export const DatePill = ({
   date,
   isCurrentMonth,
   subscriptions,
+  onAddSubscription,
 }: DatePillProps) => {
   const [subscriptionToEdit, setSubscriptionToEdit] =
     useState<Subscription | null>(null);
@@ -106,8 +108,10 @@ export const DatePill = ({
         isCurrentMonth
           ? 'bg-secondary/60'
           : 'bg-transparent text-muted-foreground',
-        isToday(date) && 'border border-foreground/10'
+        isToday(date) && 'border border-foreground/10',
+        'cursor-pointer hover:bg-secondary transition-colors'
       )}
+      onClick={() => onAddSubscription(date)}
     >
       <p className="absolute bottom-1 w-full">{format(date, 'd')}</p>
     </div>
