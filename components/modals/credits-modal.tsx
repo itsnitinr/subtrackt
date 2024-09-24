@@ -46,7 +46,7 @@ export const CreditsModal = ({ open, setOpen }: CreditsModalProps) => {
             </a>
             <p className="text-sm text-muted-foreground">
               Kumail prototyped the animations and added more interactions and
-              UI elements to the app.
+              UI elements to Daniella&apos;s design.
             </p>
           </div>
           <div className="flex flex-col gap-0.5">

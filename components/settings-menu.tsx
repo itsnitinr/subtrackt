@@ -11,6 +11,8 @@ import {
   Upload,
   Keyboard,
   Handshake,
+  XIcon,
+  MessageSquare,
 } from 'lucide-react';
 import { useOs, useHotkeys } from '@mantine/hooks';
 
@@ -28,6 +30,7 @@ import {
 
 import { KeyboardShortcuts } from '@/components/modals/keyboard-shortcuts';
 import { CreditsModal } from '@/components/modals/credits-modal';
+import { FeedbackModal } from '@/components/modals/feedback-modal';
 
 import { useSubscriptions } from '@/hooks/use-subscriptions';
 import { Subscription } from '@/types/subscription';
@@ -112,8 +115,32 @@ export const SettingsMenu = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
+  const [showFeedbackBanner, setShowFeedbackBanner] = useState(
+    localStorage.getItem('DISMISS_FEEDBACK_BANNER') !== 'true'
+  );
+
   return (
     <>
+      {showFeedbackBanner && (
+        <div className="fixed text-sm top-0 bg-foreground p-3 px-8 w-full left-0 text-background text-center">
+          Subtrackt is looking for your feedback & feature requests.{' '}
+          <span
+            className="underline cursor-pointer"
+            onClick={() => setIsFeedbackModalOpen(true)}
+          >
+            Click here
+          </span>{' '}
+          to share your thoughts.
+          <XIcon
+            className="size-5 absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
+            onClick={() => {
+              localStorage.setItem('DISMISS_FEEDBACK_BANNER', 'true');
+              setShowFeedbackBanner(false);
+            }}
+          />
+        </div>
+      )}
       <input
         type="file"
         onChange={importData}
@@ -163,6 +190,10 @@ export const SettingsMenu = () => {
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => setIsFeedbackModalOpen(true)}>
+            <MessageSquare className="size-4 mr-2" />
+            <span>Leave feedback</span>
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setIsCreditsModalOpen(true)}>
             <Handshake className="size-3 mr-2" />
             <span>Credits</span>
@@ -174,6 +205,10 @@ export const SettingsMenu = () => {
         setOpen={setIsKeyboardShortcutsModalOpen}
       />
       <CreditsModal open={isCreditsModalOpen} setOpen={setIsCreditsModalOpen} />
+      <FeedbackModal
+        open={isFeedbackModalOpen}
+        setOpen={setIsFeedbackModalOpen}
+      />
     </>
   );
 };
