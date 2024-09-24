@@ -52,7 +52,6 @@ export const SettingsMenu = () => {
   const [isKeyboardShortcutsModalOpen, setIsKeyboardShortcutsModalOpen] =
     useState(false);
   const [isCreditsModalOpen, setIsCreditsModalOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
 
   const importData = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -117,17 +116,13 @@ export const SettingsMenu = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
-  const [showFeedbackBanner, setShowFeedbackBanner] = useState(
-    localStorage.getItem('DISMISS_FEEDBACK_BANNER') !== 'true'
-  );
+  const [showFeedbackBanner, setShowFeedbackBanner] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    setShowFeedbackBanner(
+      localStorage.getItem('DISMISS_FEEDBACK_BANNER') !== 'true'
+    );
   }, []);
-
-  if (!isMounted) {
-    return null;
-  }
 
   return (
     <>
