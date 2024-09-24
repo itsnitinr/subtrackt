@@ -6,9 +6,11 @@ import {
   startOfMonth,
   endOfMonth,
   differenceInMonths,
+  addMonths,
+  addYears,
 } from 'date-fns';
 
-import { Subscription } from '@/types/subscription';
+import { Subscription, Transaction } from '@/types/subscription';
 
 interface SubscriptionState {
   subscriptions: Subscription[];
@@ -22,6 +24,7 @@ interface SubscriptionState {
   updateSubscription: (id: string, subscription: Subscription) => void;
   exportSubscriptions: () => void;
   importSubscriptions: (subscriptions: Subscription[]) => void;
+  getTransactionsTillDate: (subscription: Subscription | null) => Transaction[];
 }
 
 export const useSubscriptions = create(
@@ -100,6 +103,41 @@ export const useSubscriptions = create(
       },
       importSubscriptions: (subscriptions: Subscription[]) => {
         set({ subscriptions });
+      },
+      getTransactionsTillDate: (subscription: Subscription | null) => {
+        if (!subscription) return [];
+
+        const transactions: Transaction[] = [];
+        const today = new Date();
+        let currentDate = new Date(subscription.startDate);
+        const endDate = subscription.endDate
+          ? new Date(subscription.endDate)
+          : null;
+
+        while (currentDate <= today && (!endDate || currentDate <= endDate)) {
+          transactions.push({
+            id: crypto.randomUUID(),
+            amount: subscription.price,
+            date: new Date(currentDate),
+            subscriptionId: subscription.id,
+          });
+
+          switch (subscription.interval) {
+            case 'monthly':
+              currentDate = addMonths(currentDate, 1);
+              break;
+            case 'quarterly':
+              currentDate = addMonths(currentDate, 3);
+              break;
+            case 'yearly':
+              currentDate = addYears(currentDate, 1);
+              break;
+            default:
+              throw new Error(`Unknown interval: ${subscription.interval}`);
+          }
+        }
+
+        return transactions;
       },
     }),
     {

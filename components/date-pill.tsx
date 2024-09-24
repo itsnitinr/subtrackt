@@ -23,6 +23,7 @@ interface DatePillProps {
   isCurrentMonth: boolean;
   subscriptions: Subscription[];
   onAddSubscription: (date: Date) => void;
+  onShowSubscriptionsSummary: (subscriptions: Subscription[]) => void;
 }
 
 export const DatePill = ({
@@ -30,6 +31,7 @@ export const DatePill = ({
   isCurrentMonth,
   subscriptions,
   onAddSubscription,
+  onShowSubscriptionsSummary,
 }: DatePillProps) => {
   const [subscriptionToEdit, setSubscriptionToEdit] =
     useState<Subscription | null>(null);
@@ -60,8 +62,10 @@ export const DatePill = ({
                   isCurrentMonth
                     ? 'bg-secondary/60'
                     : 'bg-transparent text-muted-foreground',
-                  isToday(date) && 'border border-foreground/10'
+                  isToday(date) && 'border border-foreground/10',
+                  'cursor-pointer hover:bg-secondary transition-colors'
                 )}
+                onClick={() => onShowSubscriptionsSummary(subscriptions)}
               >
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                   {isCurrentMonth &&

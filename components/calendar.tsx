@@ -6,8 +6,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { DatePill } from '@/components/date-pill';
 import { AddSubscriptionOnDate } from '@/components/modals/add-subscription-on-date';
+import { SubscriptionsSummary } from '@/components/modals/subscriptions-summary';
 
 import { useSubscriptions } from '@/hooks/use-subscriptions';
+import { Subscription } from '@/types/subscription';
 
 interface CalendarProps {
   dates: Date[];
@@ -33,6 +35,9 @@ export const Calendar = ({ dates, monthToShow, direction }: CalendarProps) => {
   const monthSubscriptions = getMonthSubscriptions(monthToShow, subscriptions);
 
   const [dateToAddTo, setDateToAddTo] = useState<Date | null>(null);
+  const [subscriptionToShow, setSubscriptionToShow] = useState<Subscription[]>(
+    []
+  );
 
   return (
     <>
@@ -57,6 +62,9 @@ export const Calendar = ({ dates, monthToShow, direction }: CalendarProps) => {
                   getDate(subscription.startDate) === getDate(date)
               )}
               onAddSubscription={() => setDateToAddTo(date)}
+              onShowSubscriptionsSummary={(subscription) =>
+                setSubscriptionToShow(subscription)
+              }
             />
           ))}
         </motion.div>
@@ -65,6 +73,11 @@ export const Calendar = ({ dates, monthToShow, direction }: CalendarProps) => {
         open={!!dateToAddTo}
         onClose={() => setDateToAddTo(null)}
         dateToAddTo={dateToAddTo || new Date()}
+      />
+      <SubscriptionsSummary
+        open={!!subscriptionToShow.length}
+        onClose={() => setSubscriptionToShow([])}
+        subscriptions={subscriptionToShow}
       />
     </>
   );

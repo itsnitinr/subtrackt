@@ -8,3 +8,10 @@ export interface Subscription {
   price: number;
   interval: 'monthly' | 'quarterly' | 'yearly';
 }
+
+export interface Transaction {
+  id: string;
+  amount: number;
+  date: Date;
+  subscriptionId: string;
+}
