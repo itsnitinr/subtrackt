@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { toast } from 'sonner';
 import { useTheme } from 'next-themes';
 import {
@@ -52,6 +52,7 @@ export const SettingsMenu = () => {
   const [isKeyboardShortcutsModalOpen, setIsKeyboardShortcutsModalOpen] =
     useState(false);
   const [isCreditsModalOpen, setIsCreditsModalOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   const importData = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -119,6 +120,14 @@ export const SettingsMenu = () => {
   const [showFeedbackBanner, setShowFeedbackBanner] = useState(
     localStorage.getItem('DISMISS_FEEDBACK_BANNER') !== 'true'
   );
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <>
