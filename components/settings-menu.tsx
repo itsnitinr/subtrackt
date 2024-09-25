@@ -127,14 +127,11 @@ export const SettingsMenu = () => {
   return (
     <>
       {showFeedbackBanner && (
-        <div className="fixed text-sm top-0 bg-foreground p-3 px-8 w-full left-0 text-background text-center">
-          Subtrackt is looking for your feedback & feature requests.{' '}
-          <span
-            className="underline cursor-pointer"
-            onClick={() => setIsFeedbackModalOpen(true)}
-          >
-            Click here
-          </span>{' '}
+        <div
+          className="fixed text-sm top-0 bg-emerald-300/50 dark:bg-emerald-400/20 p-3 px-8 cursor-pointer w-full left-0 text-emerald-900 dark:text-emerald-400 text-center"
+          onClick={() => setIsFeedbackModalOpen(true)}
+        >
+          Subtrackt is looking for your feedback & feature requests. Click here
           to share your thoughts.
           <XIcon
             className="size-5 absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
