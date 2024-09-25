@@ -1,5 +1,11 @@
 import { z } from 'zod';
 
+import { groupedServices } from '@/data/subscriptions';
+
+const allLogos = groupedServices.flatMap((group) =>
+  group.services.map((service) => service.image)
+);
+
 export const subscriptionSchema = z
   .object({
     name: z
@@ -21,7 +27,10 @@ export const subscriptionSchema = z
   .refine(
     (data) => {
       if (data.image) {
-        if (data.image === '/placeholder-logo.svg') {
+        if (
+          data.image === '/placeholder-logo.svg' ||
+          allLogos.includes(data.image)
+        ) {
           return true;
         }
         return z.string().url().safeParse(data.image).success;

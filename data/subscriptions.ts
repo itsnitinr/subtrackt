@@ -186,26 +186,23 @@ export const groupedServices: GroupedServices[] = [
     services: [
       {
         name: 'Netflix',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/0/0c/Netflix_2015_N_logo.svg',
+        image: '/logos/netflix.svg',
       },
       {
         name: 'YouTube Premium',
-        image: 'https://svgl.app/library/youtube.svg',
+        image: '/logos/youtube.svg',
       },
       {
         name: 'Prime Video',
-        image: 'https://svgl.app/library/prime-video.svg',
+        image: '/logos/prime-video.svg',
       },
       {
         name: 'Hotstar',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/b/b6/Disney%2B_Hotstar_2024.svg',
+        image: '/logos/hotstar.svg',
       },
       {
         name: 'JioCinema',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/1/14/Jiocinema.png',
+        image: '/logos/jio-cinema.svg',
       },
     ],
   },
@@ -214,15 +211,15 @@ export const groupedServices: GroupedServices[] = [
     services: [
       {
         name: 'Spotify',
-        image: 'https://svgl.app/library/spotify.svg',
+        image: '/logos/spotify.svg',
       },
       {
         name: 'Apple Music',
-        image: 'https://svgl.app/library/apple-music-icon.svg',
+        image: '/logos/apple-music.svg',
       },
       {
         name: 'YouTube Music',
-        image: 'https://svgl.app/library/youtube_music.svg',
+        image: '/logos/youtube-music.svg',
       },
     ],
   },
@@ -231,21 +228,19 @@ export const groupedServices: GroupedServices[] = [
     services: [
       {
         name: 'ChatGPT',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
+        image: '/logos/chatgpt.svg',
       },
       {
         name: 'OpenAI',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg',
+        image: '/logos/openai.svg',
       },
       {
         name: 'Claude',
-        image: 'https://svgl.app/library/claude-ai.svg',
+        image: '/logos/claude-ai.svg',
       },
       {
         name: 'Gemini',
-        image: 'https://svgl.app/library/bard.svg',
+        image: '/logos/gemini.svg',
       },
     ],
   },
@@ -254,23 +249,23 @@ export const groupedServices: GroupedServices[] = [
     services: [
       {
         name: 'Google Cloud',
-        image: 'https://svgl.app/library/google.svg',
+        image: '/logos/google.svg',
       },
       {
         name: 'AWS',
-        image: 'https://svgl.app/library/aws.svg',
+        image: '/logos/aws.svg',
       },
       {
         name: 'Azure',
-        image: 'https://svgl.app/library/azure.svg',
+        image: '/logos/azure.svg',
       },
       {
         name: 'Digital Ocean',
-        image: 'https://svgl.app/library/digitalocean.svg',
+        image: '/logos/digitalocean.svg',
       },
       {
         name: 'Vercel',
-        image: 'https://svgl.app/library/vercel.svg',
+        image: '/logos/vercel.svg',
       },
     ],
   },
@@ -279,27 +274,35 @@ export const groupedServices: GroupedServices[] = [
     services: [
       {
         name: 'Adobe',
-        image: 'https://svgl.app/library/adobe.svg',
+        image: '/logos/adobe.svg',
+      },
+      {
+        name: 'Canva',
+        image: '/logos/canva.svg',
       },
       {
         name: 'Figma',
-        image: 'https://svgl.app/library/figma.svg',
+        image: '/logos/figma.svg',
       },
       {
         name: 'Zoom',
-        image: 'https://svgl.app/library/zoom.svg',
+        image: '/logos/zoom.svg',
       },
       {
         name: 'Slack',
-        image: 'https://svgl.app/library/slack.svg',
+        image: '/logos/slack.svg',
       },
       {
         name: 'Notion',
-        image: 'https://svgl.app/library/notion.svg',
+        image: '/logos/notion.svg',
       },
       {
         name: 'Linear',
-        image: 'https://svgl.app/library/linear.svg',
+        image: '/logos/linear.svg',
+      },
+      {
+        name: 'Cursor',
+        image: '/logos/cursor.png',
       },
     ],
   },
