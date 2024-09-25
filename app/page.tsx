@@ -40,6 +40,7 @@ const Home = () => {
   useHotkeys([
     ['ArrowLeft', goToPreviousMonth],
     ['ArrowRight', goToNextMonth],
+    ['m', () => setMonthToShow(new Date())],
   ]);
 
   return (

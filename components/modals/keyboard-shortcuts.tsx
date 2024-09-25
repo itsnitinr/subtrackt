@@ -38,6 +38,10 @@ export const KeyboardShortcuts = ({
             <p className="font-medium">Next month</p>
             <Kbd keys={['ArrowRight']} />
           </div>
+          <div className="flex items-center justify-between">
+            <p className="font-medium">Go to current month</p>
+            <Kbd keys={['M']} />
+          </div>
         </div>
       </DialogContent>
     </Dialog>
