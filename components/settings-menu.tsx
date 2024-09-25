@@ -135,7 +135,8 @@ export const SettingsMenu = () => {
           to share your thoughts.
           <XIcon
             className="size-5 absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               localStorage.setItem('DISMISS_FEEDBACK_BANNER', 'true');
               setShowFeedbackBanner(false);
             }}
