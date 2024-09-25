@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { isSameMonth, getDate } from 'date-fns';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -10,6 +10,7 @@ import { SubscriptionsSummary } from '@/components/modals/subscriptions-summary'
 
 import { useSubscriptions } from '@/hooks/use-subscriptions';
 import { Subscription } from '@/types/subscription';
+import { oldToNewLogoMap } from '@/lib/migrate-logos';
 
 interface CalendarProps {
   dates: Date[];
@@ -30,7 +31,8 @@ export const Calendar = ({ dates, monthToShow, direction }: CalendarProps) => {
     }),
   };
 
-  const { getMonthSubscriptions, subscriptions } = useSubscriptions();
+  const { getMonthSubscriptions, subscriptions, updateSubscription } =
+    useSubscriptions();
 
   const monthSubscriptions = getMonthSubscriptions(monthToShow, subscriptions);
 
@@ -38,6 +40,30 @@ export const Calendar = ({ dates, monthToShow, direction }: CalendarProps) => {
   const [subscriptionToShow, setSubscriptionToShow] = useState<Subscription[]>(
     []
   );
+
+  useEffect(() => {
+    const migrateLogos = () => {
+      if (localStorage.getItem('LOGO_MIGRATION_COMPLETE')) return;
+
+      subscriptions.forEach((subscription) => {
+        if (
+          oldToNewLogoMap[subscription.image as keyof typeof oldToNewLogoMap]
+        ) {
+          updateSubscription(subscription.id, {
+            ...subscription,
+            image:
+              oldToNewLogoMap[
+                subscription.image as keyof typeof oldToNewLogoMap
+              ],
+          });
+        }
+      });
+
+      localStorage.setItem('LOGO_MIGRATION_COMPLETE', 'true');
+    };
+
+    migrateLogos();
+  }, [subscriptions, updateSubscription]);
 
   return (
     <>
