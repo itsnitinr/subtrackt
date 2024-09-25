@@ -43,12 +43,22 @@ export const Calendar = ({ dates, monthToShow, direction }: CalendarProps) => {
 
   useEffect(() => {
     const migrateLogos = () => {
-      if (localStorage.getItem('LOGO_MIGRATION_COMPLETE')) return;
+      const needsMigration =
+        subscriptions.length > 0 && !localStorage.getItem('LOGO_MIGRATION_V1');
+
+      if (!needsMigration) {
+        return;
+      }
 
       subscriptions.forEach((subscription) => {
+        console.log('Current logo is', subscription.image);
         if (
           oldToNewLogoMap[subscription.image as keyof typeof oldToNewLogoMap]
         ) {
+          console.log(
+            'Updating logo to',
+            oldToNewLogoMap[subscription.image as keyof typeof oldToNewLogoMap]
+          );
           updateSubscription(subscription.id, {
             ...subscription,
             image:
@@ -56,10 +66,12 @@ export const Calendar = ({ dates, monthToShow, direction }: CalendarProps) => {
                 subscription.image as keyof typeof oldToNewLogoMap
               ],
           });
+        } else {
+          console.log('No update needed for', subscription.image);
         }
       });
 
-      localStorage.setItem('LOGO_MIGRATION_COMPLETE', 'true');
+      localStorage.setItem('LOGO_MIGRATION_V1', 'true');
     };
 
     migrateLogos();
