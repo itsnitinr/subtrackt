@@ -37,6 +37,7 @@ import { DrawerClose, DrawerFooter } from '@/components/ui/drawer';
 import { ServicePicker } from '@/components/service-picker';
 
 import { cn } from '@/lib/utils';
+import { getCurrencySymbol } from '@/lib/currency';
 
 import { subscriptionSchema } from '@/schema/subscription';
 
@@ -104,6 +105,11 @@ export const SubscriptionForm = ({
                           onChange={(e) => {
                             field.onChange(e.target.valueAsNumber);
                           }}
+                          StartIcon={
+                            <div className="text-muted-foreground">
+                              {getCurrencySymbol()}
+                            </div>
+                          }
                         />
                       </FormControl>
                       <FormMessage />
