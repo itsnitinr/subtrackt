@@ -55,9 +55,9 @@ export const SubscriptionsSummary = ({
       <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Subscriptions summary</DialogTitle>
+            <DialogTitle>Billed transactions</DialogTitle>
             <DialogDescription>
-              Get a quick overview of all your subscription spends till date.
+              A quick overview of your subscription spends till date
             </DialogDescription>
           </DialogHeader>
           <Summary subscriptions={subscriptions} />
