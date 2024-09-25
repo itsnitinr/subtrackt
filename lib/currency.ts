@@ -1,4 +1,4 @@
-const localeToCurrency = {
+export const localeToCurrency = {
   'en-AU': 'AUD',
   'en-CA': 'CAD',
   'en-GB': 'GBP',
@@ -52,30 +52,80 @@ const localeToCurrency = {
   'zh-TW': 'TWD',
 };
 
+export const currencyToName = {
+  AUD: 'Australian Dollar',
+  CAD: 'Canadian Dollar',
+  GBP: 'British Pound',
+  EUR: 'Euro',
+  INR: 'Indian Rupee',
+  NZD: 'New Zealand Dollar',
+  USD: 'United States Dollar',
+  ZAR: 'South African Rand',
+  ARS: 'Argentine Peso',
+  CLP: 'Chilean Peso',
+  COP: 'Colombian Peso',
+  MXN: 'Mexican Peso',
+  CHF: 'Swiss Franc',
+  CNY: 'Chinese Yuan',
+  HKD: 'Hong Kong Dollar',
+  JPY: 'Japanese Yen',
+  KRW: 'South Korean Won',
+  TWD: 'New Taiwan Dollar',
+  RUB: 'Russian Ruble',
+  SEK: 'Swedish Krona',
+  THB: 'Thai Baht',
+  TRY: 'Turkish Lira',
+  BDT: 'Bangladeshi Taka',
+  CZK: 'Czech Koruna',
+  DKK: 'Danish Krone',
+  HUF: 'Hungarian Forint',
+  ILS: 'Israeli New Shekel',
+  NOK: 'Norwegian Krone',
+  PLN: 'Polish Zloty',
+  RON: 'Romanian Leu',
+  SAR: 'Saudi Riyal',
+  BRL: 'Brazilian Real',
+  LKR: 'Sri Lankan Rupee',
+};
+
 export const getCurrency = () => {
-  let locale = 'en-US';
   if (typeof window !== 'undefined') {
-    locale = window.navigator.language as keyof typeof localeToCurrency;
+    const currencyPreference = localStorage.getItem('CURRENCY_PREFERENCE');
+    if (
+      currencyPreference &&
+      currencyToName[currencyPreference as keyof typeof currencyToName]
+    ) {
+      return currencyPreference;
+    }
+
+    const locale = window.navigator.language as keyof typeof localeToCurrency;
+    return localeToCurrency[locale] || 'USD';
   }
-  if (!localeToCurrency[locale as keyof typeof localeToCurrency]) {
-    return 'USD';
-  }
-  return localeToCurrency[locale as keyof typeof localeToCurrency];
+  return 'USD';
 };
 
 export const getCurrencySymbol = () => {
-  let locale = 'en-US';
   if (typeof window !== 'undefined') {
-    locale = window.navigator.language as keyof typeof localeToCurrency;
+    const currencyPreference = localStorage.getItem('CURRENCY_PREFERENCE');
+    if (
+      currencyPreference &&
+      currencyToName[currencyPreference as keyof typeof currencyToName]
+    ) {
+      const locale = window.navigator.language;
+      return Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: currencyPreference,
+        currencyDisplay: 'narrowSymbol',
+      }).format(0)[0];
+    }
+
+    const locale = window.navigator.language as keyof typeof localeToCurrency;
+    const currencyCode = localeToCurrency[locale] || 'USD';
+    return Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency: currencyCode,
+      currencyDisplay: 'narrowSymbol',
+    }).format(0)[0];
   }
-  if (!localeToCurrency[locale as keyof typeof localeToCurrency]) {
-    return 'USD';
-  }
-  const currencyCode =
-    localeToCurrency[locale as keyof typeof localeToCurrency] || 'USD';
-  return Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: currencyCode,
-    currencyDisplay: 'narrowSymbol',
-  }).format(0)[0];
+  return '$'; // Default to USD symbol
 };

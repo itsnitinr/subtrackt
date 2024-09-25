@@ -13,6 +13,7 @@ import {
   Handshake,
   XIcon,
   MessageSquare,
+  DollarSign,
 } from 'lucide-react';
 import { useOs, useHotkeys } from '@mantine/hooks';
 
@@ -34,6 +35,7 @@ import { FeedbackModal } from '@/components/modals/feedback-modal';
 
 import { useSubscriptions } from '@/hooks/use-subscriptions';
 import { Subscription } from '@/types/subscription';
+import { ChangeCurrency } from './modals/change-currency';
 
 export const SettingsMenu = () => {
   const { theme, setTheme } = useTheme();
@@ -117,6 +119,8 @@ export const SettingsMenu = () => {
 
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
   const [showFeedbackBanner, setShowFeedbackBanner] = useState(false);
+  const [isChangeCurrencyModalOpen, setIsChangeCurrencyModalOpen] =
+    useState(false);
 
   useEffect(() => {
     setShowFeedbackBanner(
@@ -177,11 +181,20 @@ export const SettingsMenu = () => {
               </DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuItem
+              onClick={() => setIsChangeCurrencyModalOpen(true)}
+            >
+              <DollarSign className="size-4 mr-2" />
+              <span>Change currency</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
               onClick={() => setIsKeyboardShortcutsModalOpen(true)}
             >
               <Keyboard className="size-4 mr-2" />
               <span>Keyboard shortcuts</span>
             </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
             <DropdownMenuItem onClick={() => inputRef.current?.click()}>
               <Upload className="size-4 mr-2" />
               <span>Import data</span>
@@ -192,14 +205,16 @@ export const SettingsMenu = () => {
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => setIsFeedbackModalOpen(true)}>
-            <MessageSquare className="size-4 mr-2" />
-            <span>Leave feedback</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setIsCreditsModalOpen(true)}>
-            <Handshake className="size-3 mr-2" />
-            <span>Credits</span>
-          </DropdownMenuItem>
+          <DropdownMenuGroup>
+            <DropdownMenuItem onClick={() => setIsFeedbackModalOpen(true)}>
+              <MessageSquare className="size-4 mr-2" />
+              <span>Leave feedback</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setIsCreditsModalOpen(true)}>
+              <Handshake className="size-3 mr-2" />
+              <span>Credits</span>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
       <KeyboardShortcuts
@@ -210,6 +225,10 @@ export const SettingsMenu = () => {
       <FeedbackModal
         open={isFeedbackModalOpen}
         setOpen={setIsFeedbackModalOpen}
+      />
+      <ChangeCurrency
+        open={isChangeCurrencyModalOpen}
+        setOpen={setIsChangeCurrencyModalOpen}
       />
     </>
   );
