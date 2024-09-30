@@ -176,36 +176,38 @@ const Summary = ({
           </p>
         </div>
       </div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Billed on</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {transactions.map((transaction) => (
-            <TableRow key={transaction.id}>
-              <TableCell>
-                {formatDate(transaction.date, 'MMM dd, yyyy')}
-              </TableCell>
-              <TableCell className="text-right">
+      <ScrollArea className="max-h-[40vh] overflow-y-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Billed on</TableHead>
+              <TableHead className="text-right">Amount</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {transactions.map((transaction) => (
+              <TableRow key={transaction.id}>
+                <TableCell>
+                  {formatDate(transaction.date, 'MMM dd, yyyy')}
+                </TableCell>
+                <TableCell className="text-right">
+                  {getCurrencySymbol()}
+                  {transaction.amount}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableCell>Total</TableCell>
+              <TableCell className="text-right font-medium text-emerald-700 dark:text-emerald-500">
                 {getCurrencySymbol()}
-                {transaction.amount}
+                {totalCost}
               </TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell>Total</TableCell>
-            <TableCell className="text-right font-medium text-emerald-700 dark:text-emerald-500">
-              {getCurrencySymbol()}
-              {totalCost}
-            </TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
+          </TableFooter>
+        </Table>
+      </ScrollArea>
     </div>
   );
 };
