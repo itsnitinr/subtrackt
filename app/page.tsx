@@ -16,6 +16,7 @@ import { DayPill } from '@/components/day-pill';
 import { MonthSwitcher } from '@/components/month-switcher';
 import { Calendar } from '@/components/calendar';
 import { AddSubscription } from '@/components/modals/add-subscription';
+import Image from 'next/image';
 
 const Home = () => {
   const [monthToShow, setMonthToShow] = useState(new Date());
@@ -45,6 +46,18 @@ const Home = () => {
 
   return (
     <div className="h-full flex flex-col justify-center gap-6">
+      <div className="flex items-end gap-1.5">
+        <Image
+          src="/logo.svg"
+          alt="Subtrackt"
+          width={100}
+          height={100}
+          className="mb-2 pointer-events-none"
+        />
+        <span className="bg-muted text-muted-foreground text-[8px] uppercase px-1 py-0.5 rounded mb-1.5">
+          Beta
+        </span>
+      </div>
       <MonthSwitcher
         month={monthToShow}
         onPrevious={goToPreviousMonth}
@@ -64,6 +77,7 @@ const Home = () => {
         />
       </section>
       <AddSubscription />
+      <div className="mb-6" />
     </div>
   );
 };
